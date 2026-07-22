@@ -1,0 +1,17 @@
+{
+    "errors": {
+        "invalid_type": "Dữ liệu không hợp lệ",
+        "invalid_string": {
+            "email": "Email không đúng định dạng",
+            "url": "Đường dẫn không hợp lệ"
+        },
+        "too_small": {
+            "string": {
+                "exact": "Phải có đúng {{minimum}} ký tự",
+                "inclusive": "Phải có ít nhất {{minimum}} ký tự",
+                "not_inclusive": "Phải nhiều hơn {{minimum}} ký tự"
+            }
+        }
+    },
+    "required": "Trường này là bắt buộc"
+}

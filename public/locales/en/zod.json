@@ -1,0 +1,17 @@
+{
+    "errors": {
+        "invalid_type": "Invalid data type",
+        "invalid_string": {
+            "email": "Invalid email format",
+            "url": "Invalid URL"
+        },
+        "too_small": {
+            "string": {
+                "exact": "Must be exactly {{minimum}} characters",
+                "inclusive": "Must be at least {{minimum}} characters",
+                "not_inclusive": "Must be more than {{minimum}} characters"
+            }
+        }
+    },
+    "required": "This field is required"
+}

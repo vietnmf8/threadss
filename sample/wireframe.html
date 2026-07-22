@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              border: 'hsl(var(--border))',
+              input: 'hsl(var(--input))',
+              ring: 'hsl(var(--ring))',
+              background: 'hsl(var(--background))',
+              foreground: 'hsl(var(--foreground))',
+              muted: 'hsl(var(--muted))',
+              primary: {
+                DEFAULT: 'hsl(var(--primary))',
+                foreground: 'hsl(var(--primary-foreground))',
+              },
+              accent: {
+                DEFAULT: 'hsl(var(--accent))',
+                foreground: 'hsl(var(--accent-foreground))',
+              },
+              destructive: {
+                DEFAULT: 'hsl(var(--destructive))',
+                foreground: 'hsl(var(--destructive-foreground))',
+              },
+              page: 'hsl(var(--page))',
+              modal: 'hsl(var(--modal))',
+              'modal-header': 'hsl(var(--modal-header))',
+              'search-input': 'hsl(var(--search-input))',
+              'action-bar': 'hsl(var(--action-bar))',
+              'icon-button': 'hsl(var(--icon-button))',
+              'dimmed-app': 'hsl(var(--dimmed-app))',
+            },
+            fontFamily: {
+              sans: ['system-ui', 'sans-serif'],
+              body: ["'SF Pro Display'", 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400&family=SF+Pro+Display:wght@500&family=SF+Pro+Display:wght@600&family=SF+Pro+Display:wght@700&display=swap"
+    />
+    <style>
+      :root {
+        --background: 0 0% 0%;
+        --foreground: 0 0% 96%;
+        --primary: 0 0% 100%;
+        --primary-foreground: 0 0% 0%;
+        --accent: 331 100% 65%;
+        --accent-foreground: 0 0% 0%;
+        --muted: 240 2% 49%;
+        --page: 0 0% 0%;
+        --modal: 0 0% 3%;
+        --modal-header: 240 8% 5%;
+        --search-input: 240 7% 6%;
+        --action-bar: 240 8% 5%;
+        --icon-button: 225 8% 10%;
+        --dimmed-app: 0 0% 2%;
+        --cat-instagram-orange: 32 100% 50%;
+        --cat-instagram-pink: 331 100% 59%;
+        --cat-instagram-purple: 264 97% 62%;
+        --border: 0 0% 96%;
+        --input: 0 0% 96%;
+        --ring: 0 0% 100%;
+        --radius: 24px;
+        --font-body: 'SF Pro Display', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      body {
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen flex items-center justify-center bg-[#0a0a0a] text-foreground p-6">
+      <section id="share-modal" class="w-full max-w-[820px] mx-auto">
+        <div
+          class="bg-modal rounded-3xl overflow-hidden shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_24px_64px_rgba(0,0,0,0.65)] border border-foreground/10 font-body"
+        >
+          <!-- Header -->
+          <div class="bg-modal-header flex items-center justify-between px-6 py-5 border-b border-foreground/[0.08]">
+            <button
+              type="button"
+              class="text-primary text-[18px] font-normal leading-6 bg-transparent border-none cursor-pointer"
+            >
+              Hủy
+            </button>
+            <span class="text-primary text-[18px] font-semibold leading-6">Gửi đến</span>
+            <!-- spacer to balance the layout -->
+            <span class="text-[18px] opacity-0 select-none">Hủy</span>
+          </div>
+
+
+          <!-- Search area -->
+          <div class="bg-modal px-6 py-5 border-b border-foreground/[0.08]">
+            <div class="relative flex items-center">
+              <div class="absolute left-5 flex items-center pointer-events-none">
+                <i class="ph ph-magnifying-glass text-muted text-[18px]"></i>
+              </div>
+              <input
+                type="text"
+                placeholder="Tìm kiếm trang cá nhân Threads"
+                class="w-full bg-search-input text-muted placeholder-muted text-base font-normal rounded-full pl-12 pr-5 py-3 border border-foreground/[0.06] outline-none focus:outline-none"
+              />
+            </div>
+          </div>
+
+
+          <!-- Empty middle area -->
+          <div class="bg-modal" style="min-height: 280px"></div>
+
+
+          <!-- Action bar -->
+          <div class="bg-action-bar border-t border-foreground/[0.08] px-6 py-6">
+            <div class="flex items-start justify-around gap-4">
+              <!-- Tin trên Instagram -->
+              <div class="flex flex-col items-center gap-3 flex-1">
+                <button
+                  type="button"
+                  class="w-[60px] h-[60px] rounded-full bg-icon-button flex items-center justify-center border border-foreground/10"
+                >
+                  <i
+                    class="ph ph-instagram-logo text-accent text-2xl"
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        #f09433 0%,
+                        #e6683c 25%,
+                        #dc2743 50%,
+                        #cc2366 75%,
+                        #bc1888 100%
+                      );
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;
+                      background-clip: text;
+                    "
+                  ></i>
+                </button>
+                <span class="text-primary text-xs font-normal text-center leading-4">Tin trên<br />Instagram</span>
+              </div>
+
+
+              <!-- Sao chép liên kết -->
+              <div class="flex flex-col items-center gap-3 flex-1">
+                <button
+                  type="button"
+                  class="w-[60px] h-[60px] rounded-full bg-icon-button flex items-center justify-center border border-foreground/10"
+                >
+                  <i class="ph ph-link text-primary text-2xl"></i>
+                </button>
+                <span class="text-primary text-xs font-normal text-center leading-4">Sao chép liên<br />kết</span>
+              </div>
+
+
+              <!-- Sao chép dưới dạng hình ảnh -->
+              <div class="flex flex-col items-center gap-3 flex-1">
+                <button
+                  type="button"
+                  class="w-[60px] h-[60px] rounded-full bg-icon-button flex items-center justify-center border border-foreground/10"
+                >
+                  <i class="ph ph-image-square text-primary text-2xl"></i>
+                </button>
+                <span class="text-primary text-xs font-normal text-center leading-4"
+                  >Sao chép dưới<br />dạng hình ảnh</span
+                >
+              </div>
+
+
+              <!-- Mã nhúng -->
+              <div class="flex flex-col items-center gap-3 flex-1">
+                <button
+                  type="button"
+                  class="w-[60px] h-[60px] rounded-full bg-icon-button flex items-center justify-center border border-foreground/10"
+                >
+                  <i class="ph ph-globe text-primary text-2xl"></i>
+                </button>
+                <span class="text-primary text-xs font-normal text-center leading-4">Mã nhúng</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
+

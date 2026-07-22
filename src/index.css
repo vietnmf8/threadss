@@ -1,0 +1,244 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    /* --- Threads Breakpoint --- */
+    --breakpoint-md: 700px;
+    --font-helvetica: "Helvetica", "Arial", sans-serif;
+
+    /* Threads */
+    --color-threads-bg: var(--threads-bg);
+    --color-threads-content-bg: var(--threads-content-bg);
+    --color-threads-auth-bg: var(--threads-auth-bg);
+    --color-threads-text: var(--threads-text);
+    --color-threads-dim: var(--threads-dim);
+    --color-threads-link: var(--threads-link);
+    --color-threads-border: var(--threads-border);
+    --color-threads-nav-icon-default: var(--threads-nav-icon-default);
+    --color-threads-nav-icon-active: var(--threads-nav-icon-active);
+    --color-threads-nav-hover-bg: var(--threads-nav-hover-bg);
+    --color-threads-icon-out: var(--threads-icon-out);
+    --color-threads-icon-fill: var(--threads-icon-fill);
+    --color-threads-hover: var(--threads-hover);
+    --color-threads-like: var(--threads-like);
+    --color-threads-repost: var(--threads-repost);
+    --color-threads-reply: var(--threads-reply);
+    --color-threads-fixed-bar-bg: var(--threads-fixed-bar-bg);
+    --color-threads-dropdown-hover: var(--threads-dropdown-hover);
+    --color-threads-feed-header-border: var(--threads-feed-header-border);
+    --border-threads-border-width: var(--threads-border-width);
+    --ease-spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --shadow-threads-floating: 0 6px 8px 0 rgba(0, 0, 0, 0.08);
+    --shadow-threads-dropdown: 0 10.5px 21px rgba(0, 0, 0, 0.08);
+    --shadow-threads-feed: 0 0 12px 0 rgba(0, 0, 0, 0.04);
+    --shadow-threads-feed-header: var(--shadow-threads-feed-header);
+    --text-threads-base: var(--text-threads-base);
+    --color-threads-destructive: var(--threads-destructive);
+    --color-threads-button-bg: var(--threads-button-bg);
+    --color-threads-button-text: var(--threads-button-text);
+    --color-threads-icon-action: var(--threads-icon-action);
+    --shadow-threads-dialog: var(--shadow-threads-dialog);
+
+    /* Shadcn Base */
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+    /* Threads Layout */
+    --threads-sidebar-width: 76px;
+    --threads-header-height: 60px;
+    --threads-bottom-nav-height: 60px;
+    --threads-content-max-width: 640px;
+
+    /* Threads */
+    --threads-bg: #fafafa;
+    --threads-content-bg: #ffffff;
+    --threads-auth-bg: #fafafa;
+    --threads-text: #000000;
+    --threads-dim: #999999;
+    --threads-link: #0095f6;
+    --threads-border: rgba(0, 0, 0, 0.15);
+    --threads-hover: rgba(0, 0, 0, 0.035);
+    --threads-nav-icon-default: rgb(184, 184, 184);
+    --threads-nav-icon-active: #000000;
+    --threads-nav-hover-bg: rgba(0, 0, 0, 0.035);
+    --threads-icon-out: #b8b8b8;
+    --threads-icon-fill: #000000;
+    --threads-like: #ff3040;
+    --threads-repost: #00ba7c;
+    --threads-reply: #1d9bf0;
+    --threads-fixed-bar-bg: #f2f2f2;
+    --threads-dropdown-hover: #f5f5f5;
+    --threads-border-width: 0.5px;
+    --text-threads-base: 15px;
+    --threads-feed-header-border: rgb(213, 213, 213);
+    --shadow-threads-feed-header:
+        0 0 0 48px var(--threads-bg), var(--shadow-threads-feed);
+    --threads-destructive: #ff3040;
+    --threads-button-bg: #000000;
+    --threads-button-text: #ffffff;
+    --threads-icon-action: rgb(66, 66, 66);
+    --shadow-threads-dialog: 0 12px 24px 0 rgba(0, 0, 0, 0.08);
+
+    /* Shadcn Base */
+    --radius: 0.625rem;
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+    /* Threads Theme (Dark) */
+    --threads-bg: #0a0a0a;
+    --threads-content-bg: #181818;
+    --threads-auth-bg: #101010;
+    --threads-text: #f3f5f7;
+    --threads-dim: #777777;
+    --threads-link: #e0f1ff;
+    --threads-border: rgba(243, 245, 247, 0.15);
+    --threads-hover: rgba(255, 255, 255, 0.08);
+    --threads-nav-icon-default: rgb(77, 77, 77);
+    --threads-nav-icon-active: #f3f5f7;
+    --threads-nav-hover-bg: rgba(255, 255, 255, 0.08);
+    --threads-icon-out: #4d4d4d;
+    --threads-icon-fill: #f3f5f7;
+    --threads-fixed-bar-bg: #1d1d1d;
+    --threads-dropdown-hover: #2f2f2f;
+    --threads-border-width: 0.5px;
+    --threads-feed-header-border: rgb(45, 45, 45);
+    --threads-destructive: #ff3040;
+    --threads-button-bg: #ffffff;
+    --threads-button-text: #000000;
+    --threads-icon-action: rgb(204, 204, 204);
+    --shadow-threads-dialog: 0 12px 24px 0 rgba(0, 0, 0, 0.25);
+
+    /* Shadcn Base */
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    html {
+        scrollbar-gutter: stable;
+    }
+    body {
+        @apply bg-threads-bg text-threads-text;
+        font-family:
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Helvetica,
+            Arial,
+            sans-serif;
+    }
+
+    body[data-scroll-locked] {
+        margin-right: 0px !important;
+    }
+
+    html.no-scroll,
+    body.no-scroll {
+        overflow: hidden !important;
+        height: 100vh !important;
+        overscroll-behavior: none;
+    }
+}

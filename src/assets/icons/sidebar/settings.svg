@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 196">
+    <rect width="196" height="196" transform="translate(196 196) rotate(180)" fill="#fff" opacity="0" />
+    <line x1="162.12" y1="67.76" x2="14.31" y2="67.76" fill="currentColor" stroke="currentColor" stroke-linecap="round"
+        stroke-miterlimit="10" stroke-width="23" />
+    <line x1="104.59" y1="133.29" x2="14.31" y2="133.29" fill="currentColor" stroke="currentColor" stroke-linecap="round"
+        stroke-miterlimit="10" stroke-width="23" />
+</svg>
