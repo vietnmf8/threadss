@@ -8,7 +8,12 @@ import { FollowIcon } from "@/assets/icons";
 import { useSelector } from "react-redux";
 import { cn } from "@/lib/utils";
 
-function PostCard({ post, isQuote = false }) {
+function PostCard({
+    post,
+    isQuote = false,
+    hasThreadLine = false,
+    disableNavigation = false,
+}) {
     const navigate = useNavigate();
     const FALLBACK_AVATAR =
         "https://static.cdninstagram.com/rsrc.php/v1/yb/r/5OTfmveiK1K.jpg";
@@ -18,13 +23,18 @@ function PostCard({ post, isQuote = false }) {
 
     /* Hành vi nhấn vào Card */
     const handleCardClick = () => {
-        navigate(`/@${post.user.username}/post/${post.id}`);
+        if (disableNavigation) return;
+        if (post?.user?.username && post?.id) {
+            navigate(`/@${post.user.username}/post/${post.id}`);
+        }
     };
 
     /* Hành vi nhấn vào Avatar */
     const handleAvatarClick = (e) => {
         e.stopPropagation();
-        navigate(`/@${post.user.username}`);
+        if (post?.user?.username) {
+            navigate(`/@${post.user.username}`);
+        }
     };
 
     /* Xử lý nếu không có avatar */
@@ -42,27 +52,29 @@ function PostCard({ post, isQuote = false }) {
         <div
             onClick={handleCardClick}
             className={cn(
-                "border-threads-border cursor-pointer transition-colors",
+                "border-threads-border transition-colors",
+                !disableNavigation && "cursor-pointer",
                 !isQuote &&
-                    "grid grid-cols-[48px_minmax(0,1fr)] border-b px-6 pt-3 pb-2",
+                    "grid grid-cols-[48px_minmax(0,1fr)] px-6 pt-3 pb-2",
+                !isQuote && !hasThreadLine && "border-b",
                 isQuote && "flex flex-col",
             )}
         >
             {/* Avatar (Chỉ hiển thị nếu KHÔNG PHẢI Quote) */}
             {!isQuote && (
-                <div className="col-start-1 row-span-2 flex flex-col items-start pt-1">
-                    <div className="relative" onClick={handleAvatarClick}>
+                <div className="col-start-1 row-span-2 flex flex-col items-center pt-1 self-stretch relative">
+                    <div className="relative z-10" onClick={handleAvatarClick}>
                         <div className="border-threads-border h-9 w-9 overflow-hidden rounded-full border-[0.5px] bg-gray-200">
                             <img
-                                src={post.user.avatar_url || FALLBACK_AVATAR}
-                                alt={post.user.username}
+                                src={post.user?.avatar_url || post.user?.avatar || FALLBACK_AVATAR}
+                                alt={post.user?.username || "User"}
                                 onError={handleImageError}
                                 className="h-full w-full object-cover"
                             />
                         </div>
 
                         {/* Chỉ hiển thị nút Follow nếu Đã đăng nhập & Chưa follow */}
-                        {isAuthenticated && !post.user.is_following && (
+                        {isAuthenticated && !post.user?.is_following && (
                             <div
                                 onClick={handleFollowClick}
                                 className="bg-threads-icon-fill border-threads-bg absolute -right-1 -bottom-1 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 transition-transform active:scale-90"
@@ -71,6 +83,11 @@ function PostCard({ post, isQuote = false }) {
                             </div>
                         )}
                     </div>
+
+                    {/* Đường chỉ kẻ dọc nối avatar với comment kế tiếp trong chuỗi thread */}
+                    {hasThreadLine && (
+                        <div className="bg-threads-border absolute top-11 bottom-0 w-0.5 rounded-full left-4.25" />
+                    )}
                 </div>
             )}
 
@@ -123,6 +140,8 @@ PostCard.propTypes = {
         }).isRequired,
     }).isRequired,
     isQuote: PropTypes.bool,
+    hasThreadLine: PropTypes.bool,
+    disableNavigation: PropTypes.bool,
 };
 
 export default PostCard;

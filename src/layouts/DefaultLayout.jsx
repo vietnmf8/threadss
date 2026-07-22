@@ -13,6 +13,7 @@ import LoginButton from "@/components/layout/LoginButton";
 import GuestLoginDialog from "@/features/auth/components/GuestLoginDialog";
 import { useGuestLogin } from "@/features/auth/hooks/useGuestLogin";
 import CreatePostDialog from "@/features/post/components/CreatePostDialog";
+import ReplyModal from "@/features/post/components/ReplyModal";
 import { useMeQuery } from "@/services/auth";
 import { setUserInfo } from "@/features/auth/authSlice";
 
@@ -119,6 +120,9 @@ function DefaultLayout() {
 
             {/* Dialog soạn thảo chung */}
             <CreatePostDialog />
+
+            {/* Modal phản hồi bài viết */}
+            <ReplyModal />
         </div>
     );
 }

@@ -1,12 +1,17 @@
 import { VerifyIcon } from "@/assets/icons";
 import { cn } from "@/lib/utils";
 import { formatTime } from "@/utils/dateFormatter";
+import { formatSnakeCaseText } from "@/utils/textFormatter";
 import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router";
 import PostMoreMenu from "./PostMoreMenu";
 
 function StandardPostHeader({ user, createdAt, post, className, onStopPropagation }) {
+    const storedTopic = post?.id ? localStorage.getItem(`reply_topic_${post.id}`) : null;
+    const rawTopic = post?.topic_name || post?.topic || post?.category_name || post?.category || storedTopic;
+    const topicName = typeof rawTopic === "object" ? rawTopic?.name : rawTopic;
+
     return (
         <div
             className={cn(
@@ -14,8 +19,8 @@ function StandardPostHeader({ user, createdAt, post, className, onStopPropagatio
                 className,
             )}
         >
-            {/* Username & Verify & Time */}
-            <div className="group flex h-full items-center gap-1.5">
+            {/* Username & Verify & Topic & Time */}
+            <div className="group flex h-full items-center gap-1.5 flex-wrap">
                 <div
                     className="flex items-center gap-1"
                     onClick={onStopPropagation}
@@ -29,6 +34,12 @@ function StandardPostHeader({ user, createdAt, post, className, onStopPropagatio
 
                     {user?.verified && (
                         <VerifyIcon className="h-3 w-3 text-blue-500" />
+                    )}
+
+                    {topicName && (
+                        <span className="text-threads-dim text-[14px]">
+                            &gt; {formatSnakeCaseText(topicName)}
+                        </span>
                     )}
                 </div>
 

@@ -10,6 +10,10 @@ const postSlice = createSlice({
         isDialogOpen: false,
         // Dữ liệu bài viết gốc khi thực hiện Quote (Trích dẫn)
         quotedPost: null,
+        // Trạng thái đóng/mở Reply Modal
+        isReplyDialogOpen: false,
+        // Dữ liệu bài viết gốc đang được phản hồi (Reply)
+        replyTargetPost: null,
     },
     reducers: {
         /**
@@ -27,8 +31,28 @@ const postSlice = createSlice({
             state.isDialogOpen = false;
             state.quotedPost = null;
         },
+        /**
+         * Mở Reply Modal
+         * @param {Object} action.payload - Object chứa thông tin bài viết được reply
+         */
+        openReplyDialog: (state, action) => {
+            state.isReplyDialogOpen = true;
+            state.replyTargetPost = action.payload || null;
+        },
+        /**
+         * Đóng Reply Modal và dọn dẹp dữ liệu bài viết gốc
+         */
+        closeReplyDialog: (state) => {
+            state.isReplyDialogOpen = false;
+            state.replyTargetPost = null;
+        },
     },
 });
 
-export const { openPostDialog, closePostDialog } = postSlice.actions;
+export const {
+    openPostDialog,
+    closePostDialog,
+    openReplyDialog,
+    closeReplyDialog,
+} = postSlice.actions;
 export default postSlice.reducer;

@@ -13,6 +13,7 @@ import {
 } from "@/assets/icons";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import { formatSnakeCaseText } from "@/utils/textFormatter";
 
 /**
  * Component quản lý vùng nhập liệu văn bản và thanh công cụ.
@@ -32,8 +33,9 @@ function CreatePostInput({
     const [displayUser, setDisplayUser] = useState(reduxUser);
     const textareaRef = useRef(null);
 
-    // Placeholder động: Khối đầu là "Whats new", khối sau là "Say more"
-    const placeholderText = t(thread.placeholder);
+    // Placeholder động: Khối đầu là "Whats new" hoặc custom (dành cho Reply), khối sau là "Say more"
+    const placeholderText =
+        thread.customPlaceholder || (thread.placeholder ? t(thread.placeholder) : "");
 
     // Kiểm tra sự hiện diện của Topic Area
     const hasTopicRow = index === 0 || (index > 0 && topic.trim().length > 0);
@@ -127,7 +129,7 @@ function CreatePostInput({
                                     />
                                 ) : (
                                     <span className="text-threads-dim text-start text-[15px] font-semibold">
-                                        {topic}
+                                        {formatSnakeCaseText(topic)}
                                     </span>
                                 )}
                             </div>

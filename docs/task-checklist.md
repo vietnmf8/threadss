@@ -91,23 +91,23 @@ Tạo file `/src/pages/Auth/ResetPassword.jsx` để xây dựng trang reset pas
 
 ---
 
-## 8. Xây dựng ReplyModal `Tự luận` [ ] (Chưa hoàn thành)
+## 8. Xây dựng ReplyModal `Tự luận` [x] (Hoàn thành)
 
 Tạo file `/src/components/post/ReplyModal.jsx` để xây dựng ReplyModal như sau:
 
 **Tính năng cần hoàn thiện:**
 
-- [ ] **Reply form:** Hiển thị avatar của user hiện tại, username, placeholder "Reply to [username]...", và textarea để nhập nội dung reply
-- [ ] **Toolbar actions:** Thanh công cụ phía dưới textarea gồm 5 buttons:
+- [x] **Reply form:** Hiển thị bài viết gốc ở trên cùng, avatar của user hiện tại, username, placeholder "Reply to [username]...", và textarea để nhập nội dung reply
+- [x] **Toolbar actions:** Thanh công cụ phía dưới textarea gồm 5 buttons:
   - Upload ảnh/video
   - Upload GIF
   - Chọn emoji
   - Poll/Survey (nếu cần)
   - Add location
-- [ ] **Add topic:** Link "Add a topic" để thêm topic/tag cho reply
-- [ ] **Add to thread:** Nút "Add to thread" để thêm reply này vào thread (tạo chuỗi nhiều posts)
-- [ ] **Reply options:** Nút "Reply options" ở cuối để cài đặt quyền reply (ai có thể reply lại comment này)
-- [ ] **Post button:** Nút "Post" để gửi reply, disabled khi chưa nhập gì, active khi đã có nội dung. Sau khi post thành công thì đóng modal và refresh danh sách comments
+- [x] **Add topic:** Link "Add a topic" để thêm topic/tag cho reply
+- [x] **Add to thread:** Nút "Add to thread" để thêm reply này vào thread (tạo chuỗi nhiều posts)
+- [x] **Reply options:** Nút "Reply options" ở cuối để cài đặt quyền reply (ai có thể reply lại comment này)
+- [x] **Post button:** Nút "Post" để gửi reply, disabled khi chưa nhập gì, active khi đã có nội dung. Sau khi post thành công thì đóng modal và refresh danh sách comments
 
 ---
 

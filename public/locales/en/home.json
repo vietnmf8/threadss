@@ -34,5 +34,8 @@
     "save": "Save",
     "dont_save": "Don't save",
     "discard": "Discard",
-    "feature_in_development": "Feature in development..."
+    "feature_in_development": "Feature in development...",
+    "permission_everyone": "Anyone can reply",
+    "permission_following": "Profiles you follow",
+    "permission_mentioned": "Mentioned only"
 }

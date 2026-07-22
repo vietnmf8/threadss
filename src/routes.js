@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Activity from "./pages/Activity";
 import Profile from "./pages/Profile";
+import PostDetail from "./pages/PostDetail";
 
 /* Lazy Load */
 const Login = lazy(() => import("./pages/Auth/Login"));
@@ -23,6 +24,7 @@ const routes = [
             { path: paths.search, component: Search },
             { path: paths.activity, component: Activity, private: true },
             { path: paths.profile, component: Profile, private: true },
+            { path: paths.post_detail, component: PostDetail },
         ],
     },
     {

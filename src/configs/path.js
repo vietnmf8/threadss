@@ -14,6 +14,9 @@ const paths = {
     /* Feed Tab */
     following: "/following",
     ghost_posts: "/ghost_posts",
+
+    /* Post Detail */
+    post_detail: "/:username/post/:postId",
 };
 
 /* Danh sách các route được phép hiển thị Splash Screen */

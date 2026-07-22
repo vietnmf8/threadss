@@ -11,7 +11,7 @@ import {
 } from "@/assets/icons";
 import { useLikePostMutation, useRepostPostMutation } from "@/services/post";
 import { useGuestLogin } from "@/features/auth/hooks/useGuestLogin";
-import { openPostDialog } from "../postSlice";
+import { openPostDialog, openReplyDialog } from "../postSlice";
 
 /**
  * Logic xử lý cho các hành động của bài viết
@@ -91,8 +91,10 @@ export const usePostActions = (props) => {
 
     /* Xử lý Phản hồi */
     const handleReply = useCallback(() => {
-        console.log("Mở Modal Reply cho bài viết:", id);
-    }, [id]);
+        if (props.post) {
+            dispatch(openReplyDialog(props.post));
+        }
+    }, [dispatch, props.post]);
 
     /* Xử lý Chia sẻ */
     const handleShare = useCallback(() => {
