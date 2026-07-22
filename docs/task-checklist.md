@@ -111,16 +111,16 @@ Tạo file `/src/components/post/ReplyModal.jsx` để xây dựng ReplyModal nh
 
 ---
 
-## 9. Xây dựng UI và Logic trang Embed Post `Tự luận` [ ] (Chưa hoàn thành)
+## 9. Xây dựng UI và Logic trang Embed Post `Tự luận` [x] (Đã hoàn thành)
 
 Trang này tạo ra không phải phục vụ end-user truy cập trực tiếp, nó được sử dụng để mở trong thẻ `iframe` với mục đích cho phép nhúng post vào một trang web khác.
 
 **Tính năng cần hoàn thiện:**
 
-- [ ] **Trang Embed:** Tạo file `/src/pages/Embed.jsx` với route `/:username/post/:postId/embed` để hiển thị một post dạng embed, không có Sidebar, không có LoginPanel, chỉ hiển thị PostCard đơn lẻ với white background.
-- [ ] **Layout Embed:** Tạo `/src/layouts/EmbedLayout.jsx` chứa layout đơn giản chỉ có main content full width, không có navigation, không có footer, phù hợp để nhúng vào iframe.
-- [ ] **Fetch Post data:** Trong Embed page gọi API để lấy thông tin post và hiển thị PostCard với đầy đủ thông tin: avatar, username, timestamp, content, media, interaction bar, "View on Theads".
-- [ ] **Responsive embed:** Trang Embed phải responsive, đảm bảo hiển thị tốt khi nhúng vào các website khác.
+- [x] **Trang Embed:** Tạo file `/src/pages/Embed.jsx` với route `/:username/post/:postId/embed` để hiển thị một post dạng embed, không có Sidebar, không có LoginPanel, chỉ hiển thị PostCard đơn lẻ với white background.
+- [x] **Layout Embed:** Tạo `/src/layouts/EmbedLayout.jsx` chứa layout đơn giản chỉ có main content full width, không có navigation, không có footer, phù hợp để nhúng vào iframe.
+- [x] **Fetch Post data:** Trong Embed page gọi API để lấy thông tin post và hiển thị PostCard với đầy đủ thông tin: avatar, username, timestamp, content, media, interaction bar, "View on Theads".
+- [x] **Responsive embed:** Trang Embed phải responsive, đảm bảo hiển thị tốt khi nhúng vào các website khác.
 
 ---
 

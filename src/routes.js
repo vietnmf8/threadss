@@ -2,6 +2,7 @@ import { lazy } from "react";
 import paths from "./configs/path";
 import AuthLayout from "./layouts/AuthLayout";
 import DefaultLayout from "./layouts/DefaultLayout";
+import EmbedLayout from "./layouts/EmbedLayout";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Activity from "./pages/Activity";
@@ -13,6 +14,7 @@ const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
 const ForgotPassword = lazy(() => import("./pages/Auth/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword"));
+const Embed = lazy(() => import("./pages/Embed"));
 
 const routes = [
     {
@@ -34,6 +36,13 @@ const routes = [
             { path: paths.login, component: Login },
             { path: paths.forgot_password, component: ForgotPassword },
             { path: paths.reset_password, component: ResetPassword },
+        ],
+    },
+    {
+        layout: EmbedLayout,
+        children: [
+            { path: paths.embed_post, component: Embed },
+            { path: paths.embed_post_with_at, component: Embed },
         ],
     },
 ];

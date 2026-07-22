@@ -17,6 +17,10 @@ const paths = {
 
     /* Post Detail */
     post_detail: "/:username/post/:postId",
+
+    /* Embed Post */
+    embed_post: "/:username/post/:postId/embed",
+    embed_post_with_at: "/@:username/post/:postId/embed",
 };
 
 /* Danh sách các route được phép hiển thị Splash Screen */
