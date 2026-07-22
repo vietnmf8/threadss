@@ -83,6 +83,15 @@ export const authApi = createApi({
                 body,
             }),
         }),
+
+        /* Xác thực Email */
+        verifyEmail: builder.mutation({
+            query: (body) => ({
+                url: "/auth/verify-email",
+                method: "POST",
+                body,
+            }),
+        }),
     }),
 });
 
@@ -97,4 +106,5 @@ export const {
     useValidateResetTokenQuery,
     useResetPasswordMutation,
     useRefreshTokenMutation,
+    useVerifyEmailMutation,
 } = authApi;

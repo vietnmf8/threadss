@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import paths from "@/configs/path";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
@@ -12,6 +12,9 @@ import { useQuickLogin } from "@/features/auth/hooks/useQuickLogin";
 
 function LoginForm() {
     const { t } = useTranslation(["auth", "common"]);
+    const location = useLocation();
+    const verifySuccessMessage = location.state?.verifySuccessMessage;
+
     const { register, handleSubmit, errors, isValid, isLoading, watch } =
         useLoginForm();
 
@@ -39,6 +42,15 @@ function LoginForm() {
                     {t("auth:login_title")}
                 </span>
             </div>
+
+            {/* Banner Thông Báo Xác Minh Email Thành Công */}
+            {verifySuccessMessage && (
+                <div className="mb-4 w-full rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-center">
+                    <p className="text-[14px] font-medium leading-tight text-emerald-500">
+                        {verifySuccessMessage}
+                    </p>
+                </div>
+            )}
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="w-full space-y-3">

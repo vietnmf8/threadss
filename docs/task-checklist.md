@@ -124,14 +124,14 @@ Trang này tạo ra không phải phục vụ end-user truy cập trực tiếp,
 
 ---
 
-## 10. Xây dựng trang VerifyEmail `Tự luận` [ ] (Chưa hoàn thành)
+## 10. Xây dựng trang VerifyEmail `Tự luận` [x] (Đã hoàn thành)
 
 Tạo file `/src/pages/Auth/VerifyEmail.jsx`
 
-- [ ] 1. Sử dụng AuthLayout làm wrapper cho trang này
-- [ ] 2. Khi component mount, đọc token từ URL parameter và tự động gọi API "Verify mail" với body {token} để xác thực
-- [ ] 3. Hiển thị loading spinner và text "Đang xác minh..." trong khi đang gọi API
-- [ ] 4. Khi API xác minh thất bại, hiển thị message lỗi "Liên kết đã hết hạn hoặc không hợp lệ." màu đỏ
-- [ ] 5. Khi thất bại, không hiển thị form, chỉ hiển thị button "Đi tới trang đăng nhập" để chuyển về `/login`
-- [ ] 6. Khi API thành công, tự động chuyển hướng về `/login`
-- [ ] 7. Khi chuyển về `/login` thành công, hiển thị message "Đã xác minh tài khoản thành công. Vui lòng đăng nhập." vị trí giữa tiêu đề và input đầu tiên
+- [x] 1. Sử dụng AuthLayout làm wrapper cho trang này
+- [x] 2. Khi component mount, đọc token từ URL parameter và tự động gọi API "Verify mail" với body {token} để xác thực
+- [x] 3. Hiển thị loading spinner và text "Đang xác minh..." trong khi đang gọi API
+- [x] 4. Khi API xác minh thất bại, hiển thị message lỗi "Liên kết đã hết hạn hoặc không hợp lệ." màu đỏ
+- [x] 5. Khi thất bại, không hiển thị form, chỉ hiển thị button "Đi tới trang đăng nhập" để chuyển về `/login`
+- [x] 6. Khi API thành công, tự động chuyển hướng về `/login`
+- [x] 7. Khi chuyển về `/login` thành công, hiển thị message "Đã xác minh tài khoản thành công. Vui lòng đăng nhập." vị trí giữa tiêu đề và input đầu tiên

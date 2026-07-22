@@ -14,6 +14,7 @@ const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
 const ForgotPassword = lazy(() => import("./pages/Auth/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword"));
+const VerifyEmail = lazy(() => import("./pages/Auth/VerifyEmail"));
 const Embed = lazy(() => import("./pages/Embed"));
 
 const routes = [
@@ -36,6 +37,7 @@ const routes = [
             { path: paths.login, component: Login },
             { path: paths.forgot_password, component: ForgotPassword },
             { path: paths.reset_password, component: ResetPassword },
+            { path: paths.verify_email, component: VerifyEmail },
         ],
     },
     {
