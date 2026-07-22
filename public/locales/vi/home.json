@@ -37,5 +37,8 @@
     "feature_in_development": "Tính năng đang phát triển...",
     "permission_everyone": "Bất kỳ ai cũng có thể trả lời",
     "permission_following": "Hồ sơ bạn theo dõi",
-    "permission_mentioned": "Chỉ những người được nhắc đến"
+    "permission_mentioned": "Chỉ những người được nhắc đến",
+    "post_created_success": "Đã đăng bài thành công!",
+    "post_failed": "Đăng bài thất bại",
+    "posting": "Đang đăng..."
 }

@@ -21,9 +21,14 @@ const REPORT_REASONS = [
  */
 function ReportModal({ open, onOpenChange, post }) {
     const [selectedReason, setSelectedReason] = useState("spam");
+    const isComment = Boolean(post?.parent_id);
 
     const handleSubmitReport = () => {
-        toast.success("Cảm ơn bạn đã báo cáo. Chúng tôi sẽ xem xét bài viết này.");
+        toast.success(
+            isComment
+                ? "Cảm ơn bạn đã báo cáo. Chúng tôi sẽ xem xét bình luận này."
+                : "Cảm ơn bạn đã báo cáo. Chúng tôi sẽ xem xét bài viết này."
+        );
         onOpenChange(false);
     };
 
@@ -32,13 +37,13 @@ function ReportModal({ open, onOpenChange, post }) {
             <DialogContent className="max-w-[440px] w-full bg-threads-bg border border-threads-border text-threads-text rounded-3xl p-6 shadow-2xl">
                 <DialogHeader className="mb-4 text-center">
                     <DialogTitle className="text-xl font-bold text-center">
-                        Báo cáo bài viết
+                        {isComment ? "Báo cáo bình luận" : "Báo cáo bài viết"}
                     </DialogTitle>
                 </DialogHeader>
 
                 <div className="flex flex-col gap-4">
                     <span className="text-sm text-threads-dim">
-                        Hãy chọn lý do bạn muốn báo cáo bài viết của @{post?.user?.username || "người dùng này"}:
+                        Hãy chọn lý do bạn muốn báo cáo {isComment ? "bình luận" : "bài viết"} của @{post?.user?.username || "người dùng này"}:
                     </span>
 
                     <div className="flex flex-col gap-2">

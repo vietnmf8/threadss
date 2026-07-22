@@ -107,7 +107,7 @@ function ReplyModal() {
         if (!canPost || !replyTargetPost?.id || isSubmitting) return;
 
         try {
-            const targetId = replyTargetPost.id;
+            let currentTargetId = replyTargetPost.id;
 
             for (let i = 0; i < threads.length; i++) {
                 const currentThread = threads[i];
@@ -120,11 +120,16 @@ function ReplyModal() {
                         formData.append("topic", topic.trim());
                     }
 
-                    await createReply({
-                        id: targetId,
+                    const response = await createReply({
+                        id: currentTargetId,
                         body: formData,
                         topicName: topic.trim(),
                     }).unwrap();
+
+                    const createdId = response?.data?.id || response?.id;
+                    if (createdId) {
+                        currentTargetId = createdId;
+                    }
                 }
             }
 

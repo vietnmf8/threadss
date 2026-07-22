@@ -10,6 +10,7 @@ import {
 import { usePostMoreMenu } from "../hooks/usePostMoreMenu";
 import ConfirmActionDialog from "./ConfirmActionDialog";
 import ReportModal from "./ReportModal";
+import EditPostModal from "./EditPostModal";
 
 /**
  * Component Menu 3 chấm (Post More Options) hiển thị trên góc phải bài viết
@@ -18,11 +19,14 @@ import ReportModal from "./ReportModal";
 function PostMoreMenu({ post }) {
     const {
         isOwner,
+        isComment,
         isMenuOpen,
         setIsMenuOpen,
         isSaved,
         reportModalOpen,
         setReportModalOpen,
+        editModalOpen,
+        setEditModalOpen,
         confirmState,
         setConfirmState,
         handleCopyLink,
@@ -36,14 +40,18 @@ function PostMoreMenu({ post }) {
         handleOpenReport,
     } = usePostMoreMenu(post);
 
-    /* Cấu hình các item menu tùy theo người sở hữu bài viết */
+    /* Cấu hình các item menu tùy theo người sở hữu bài viết và loại item (Bài viết / Bình luận) */
     const options = isOwner
         ? [
               { id: "copy_link", label: "Sao chép liên kết", onClick: handleCopyLink },
-              { id: "edit", label: "Chỉnh sửa bài viết", onClick: handleEditPost },
+              {
+                  id: "edit",
+                  label: isComment ? "Chỉnh sửa bình luận" : "Chỉnh sửa bài viết",
+                  onClick: handleEditPost,
+              },
               {
                   id: "delete",
-                  label: "Xóa bài viết",
+                  label: isComment ? "Xóa bình luận" : "Xóa bài viết",
                   isDanger: true,
                   onClick: handleOpenDeleteConfirm,
               },
@@ -51,10 +59,20 @@ function PostMoreMenu({ post }) {
         : [
               {
                   id: "save",
-                  label: isSaved ? "Bỏ lưu bài viết" : "Lưu bài viết",
+                  label: isSaved
+                      ? isComment
+                          ? "Bỏ lưu bình luận"
+                          : "Bỏ lưu bài viết"
+                      : isComment
+                        ? "Lưu bình luận"
+                        : "Lưu bài viết",
                   onClick: handleToggleSave,
               },
-              { id: "not_interested", label: "Không quan tâm", onClick: handleNotInterested },
+              {
+                  id: "not_interested",
+                  label: isComment ? "Ẩn bình luận tương tự" : "Không quan tâm",
+                  onClick: handleNotInterested,
+              },
               { id: "mute", label: `Tắt tiếng @${post?.user?.username || ""}`, onClick: handleMuteUser },
               { id: "restrict", label: `Hạn chế @${post?.user?.username || ""}`, onClick: handleRestrictUser },
               {
@@ -65,7 +83,7 @@ function PostMoreMenu({ post }) {
               },
               {
                   id: "report",
-                  label: "Báo cáo bài viết",
+                  label: isComment ? "Báo cáo bình luận" : "Báo cáo bài viết",
                   isDanger: true,
                   onClick: handleOpenReport,
               },
@@ -120,6 +138,13 @@ function PostMoreMenu({ post }) {
                 confirmText={confirmState.confirmText}
                 isDanger={confirmState.isDanger}
                 onConfirm={confirmState.onConfirm}
+            />
+
+            {/* Modal chỉnh sửa bài viết / bình luận */}
+            <EditPostModal
+                isOpen={editModalOpen}
+                onOpenChange={setEditModalOpen}
+                post={post}
             />
 
             {/* Report Modal cho Report Post */}

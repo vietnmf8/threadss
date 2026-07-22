@@ -8,6 +8,12 @@ import {
     DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { QuoteMoreIcon, ReplyOptionsIcon, DraftsIcon } from "@/assets/icons";
 import { closePostDialog } from "../postSlice";
 import CreatePostInput from "./CreatePostInput";
@@ -17,6 +23,7 @@ import { useThreadComposer } from "../hooks/useThreadComposer";
 import AnimateHeight from "@/components/ui/animate-height";
 import toast from "react-hot-toast";
 import ConfirmCloseDialog from "./ConfirmCloseDialog";
+import { useCreatePostMutation, useCreateReplyMutation } from "@/services/post";
 
 /**
  * Hộp thoại tạo Thread mới hoặc Trích dẫn (Quote)
@@ -27,8 +34,14 @@ function CreatePostDialog() {
 
     /* Local state  */
     const [showConfirm, setShowConfirm] = useState(false);
+    const [replyPermission, setReplyPermission] = useState("everyone");
     const { isDialogOpen, quotedPost } = useSelector((state) => state.post);
     const { user: authUser } = useSelector((state) => state.auth);
+
+    /* RTK Query mutations */
+    const [createPost, { isLoading: isCreatingPost }] = useCreatePostMutation();
+    const [createReply, { isLoading: isCreatingReply }] = useCreateReplyMutation();
+    const isSubmitting = isCreatingPost || isCreatingReply;
 
     /* Quản lý Multi-thread */
     const {
@@ -46,7 +59,10 @@ function CreatePostDialog() {
 
     /* Reset nội dung khi Dialog đóng */
     useEffect(() => {
-        if (!isDialogOpen) resetThreads();
+        if (!isDialogOpen) {
+            resetThreads();
+            setReplyPermission("everyone");
+        }
     }, [isDialogOpen, resetThreads]);
 
     /* Logic xử lý yêu cầu đóng (khi nhấn Hủy, ESC hoặc click ngoài) */
@@ -61,6 +77,7 @@ function CreatePostDialog() {
     /* Hàm đóng hoàn toàn và reset dữ liệu */
     const handleFinalClose = () => {
         resetThreads();
+        setReplyPermission("everyone");
         dispatch(closePostDialog());
         setShowConfirm(false);
     };
@@ -90,6 +107,62 @@ function CreatePostDialog() {
         return "https://static.cdninstagram.com/rsrc.php/v1/yb/r/5OTfmveiK1K.jpg";
     };
     const userAvatar = getAvatar();
+
+    /* Lấy nhãn hiển thị cho Reply Permission */
+    const getPermissionLabel = (permission) => {
+        if (permission === "following") {
+            return t("home:permission_following");
+        }
+        if (permission === "mentioned") {
+            return t("home:permission_mentioned");
+        }
+        return t("home:permission_everyone");
+    };
+
+    /* Xử lý Submit Tạo Post mới / Thread mới */
+    const handleSubmitPost = async () => {
+        if (!canPost || isSubmitting) return;
+
+        try {
+            let parentPostId = null;
+
+            for (let i = 0; i < threads.length; i++) {
+                const currentThread = threads[i];
+                if (currentThread.content.trim()) {
+                    const formData = new FormData();
+                    formData.append("content", currentThread.content);
+                    formData.append("reply_permission", replyPermission);
+                    if (i === 0 && topic.trim()) {
+                        formData.append("topic_name", topic.trim());
+                        formData.append("topic", topic.trim());
+                    }
+
+                    if (i === 0 && !isQuoteMode) {
+                        const response = await createPost(formData).unwrap();
+                        parentPostId = response?.data?.id || response?.id;
+                    } else if (i === 0 && isQuoteMode) {
+                        formData.append("original_post_id", quotedPost.id);
+                        const response = await createPost(formData).unwrap();
+                        parentPostId = response?.data?.id || response?.id;
+                    } else {
+                        const response = await createReply({
+                            id: parentPostId,
+                            body: formData,
+                            topicName: topic.trim(),
+                        }).unwrap();
+                        const createdReplyId = response?.data?.id || response?.id;
+                        if (createdReplyId) parentPostId = createdReplyId;
+                    }
+                }
+            }
+
+            toast.success(t("home:post_created_success") || "Đã đăng bài thành công!");
+            handleFinalClose();
+        } catch (error) {
+            console.error("Lỗi khi đăng bài:", error);
+            toast.error(error?.data?.message || t("home:post_failed") || "Đăng bài thất bại");
+        }
+    };
 
     return (
         <Dialog open={isDialogOpen} onOpenChange={handleCloseRequest}>
@@ -239,23 +312,51 @@ function CreatePostDialog() {
                 <div className="flex h-21 w-full flex-row-reverse items-center justify-between px-6">
                     <Button
                         variant="outline"
+                        onClick={handleSubmitPost}
+                        disabled={!canPost || isSubmitting}
                         className={cn(
                             "h-9 rounded-[10px] border px-4 text-[15px] font-semibold transition-all",
                             "border-threads-border text-threads-text bg-transparent shadow-none hover:bg-transparent",
-                            !canPost
+                            !canPost || isSubmitting
                                 ? "cursor-not-allowed opacity-40"
                                 : "cursor-pointer active:scale-90",
                         )}
                     >
-                        {t("home:post_btn")}
+                        {isSubmitting
+                            ? t("home:posting") || "Đang đăng..."
+                            : t("home:post_btn") || "Đăng"}
                     </Button>
 
-                    <div className="flex grow cursor-pointer items-center gap-2 transition-opacity active:opacity-60">
-                        <ReplyOptionsIcon className="text-threads-dim h-5 w-5" />
-                        <span className="text-threads-dim text-[15px] font-semibold">
-                            {t("home:reply_options")}
-                        </span>
-                    </div>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <div className="flex grow cursor-pointer items-center gap-2 transition-opacity active:opacity-60">
+                                <ReplyOptionsIcon className="text-threads-dim h-5 w-5" />
+                                <span className="text-threads-dim text-[15px] font-semibold">
+                                    {getPermissionLabel(replyPermission)}
+                                </span>
+                            </div>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="start" className="bg-threads-bg border-threads-border text-threads-text w-64 rounded-xl border p-1 shadow-lg z-[100]">
+                            <DropdownMenuItem
+                                onClick={() => setReplyPermission("everyone")}
+                                className="cursor-pointer text-[14px] px-3 py-2 rounded-lg hover:bg-threads-dropdown-hover"
+                            >
+                                {t("home:permission_everyone")}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={() => setReplyPermission("following")}
+                                className="cursor-pointer text-[14px] px-3 py-2 rounded-lg hover:bg-threads-dropdown-hover"
+                            >
+                                {t("home:permission_following")}
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={() => setReplyPermission("mentioned")}
+                                className="cursor-pointer text-[14px] px-3 py-2 rounded-lg hover:bg-threads-dropdown-hover"
+                            >
+                                {t("home:permission_mentioned")}
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
 
                 {/* Dialog xác nhận lồng bên trong */}

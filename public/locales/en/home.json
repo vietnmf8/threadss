@@ -37,5 +37,8 @@
     "feature_in_development": "Feature in development...",
     "permission_everyone": "Anyone can reply",
     "permission_following": "Profiles you follow",
-    "permission_mentioned": "Mentioned only"
+    "permission_mentioned": "Mentioned only",
+    "post_created_success": "Post published successfully!",
+    "post_failed": "Failed to publish post",
+    "posting": "Posting..."
 }
