@@ -43,6 +43,7 @@
 
 ## 2. Coding Style & Formatting Rules
 
+- **Communication Language:** MUST use 100% Vietnamese language in all chat communications and reports with the USER without exception.
 - **Indentation:** 4 spaces (Configured via `.prettierrc`).
 - **Quotes:** Double quotes `"..."` for imports and string literals.
 - **Semicolons:** ALWAYS include semicolons `;`.
@@ -107,3 +108,5 @@ For specific implementation deep-dives, consult the following specialized skill 
 - [UI Styling, Tailwind v4 & Shadcn](file:///.agents/skills/ui-and-styling/SKILL.md)
 - [Performance Optimization Standards](file:///.agents/skills/performance-optimization/SKILL.md)
 - [Performance Audit & Review](file:///.agents/skills/performance-review/SKILL.md)
+- [Comprehensive Verification](file:///.agents/skills/verification/SKILL.md)
+- [Lessons Learned & Bug Prevention](file:///.agents/skills/lessons-learned/SKILL.md)

@@ -68,23 +68,23 @@ Tạo file `/src/pages/Auth/ResetPassword.jsx` để xây dựng trang reset pas
 - [x] **Repost Post:**
   - [x] **Repost/Unrepost:** Xử lý click button Repost để repost/unrepost bài viết, icon đổi màu xanh khi đã repost, cập nhật số lượng ngay lập tức (implement giống phần Like/Unlike ở trên)
   - [x] **Quote:** Khi click vào "Quote" thì mở QuoteModal (`/src/components/post/QuoteModal.jsx`), tập trung làm UI, còn logic làm sau
-- [ ] **Comment:** Click button Comment để mở modal "Reply", tập trung vào UI, logic mô tả ở bài sau
-- [ ] **Share Post:** Click button Share để mở menu share với options:
-  - [ ] **Copy link:** Dùng thư viện `copy-to-clipboard`
-  - [ ] **Copy as image:** Hiển thị modal như trong gốc, dùng `html-to-image` để chuyển DOM node sang ảnh, dùng `download` để tải xuống ảnh (có demo trong Readme của `html-to-image`, hãy đọc kỹ)
-  - [ ] **Get embed code:**
-    - [ ] Mở EmbedModal (`/src/components/post/EmbedModal.jsx`)
-    - [ ] Hiển thị preview, phần này khi nào làm trong page Embed thì dùng `iframe` để preview
-    - [ ] Code embed sử dụng thẻ `<iframe>` với src link về `location.origin + "/" + username + "/post/" + postId + "/embed"`. Cấu trúc URL đơn giản chỉ là: `https://domain.com/nguyenvana/post/DiyNUECS0k/embed`. Nhấn "Copy" sẽ sao chép code trên vào clipboard
-- [ ] **Post Menu (3 chấm):** Tạo dropdown menu với các options:
-  - [ ] **Save/Unsave:** Lưu bài viết vào collection
-  - [ ] **Not interested:** Ẩn bài viết khỏi feed
-  - [ ] **Mute:** Tắt tiếng người dùng này
-  - [ ] **Restrict:** Hạn chế người dùng này
-  - [ ] **Block:** Chặn người dùng (màu đỏ, cần confirmation modal)
-  - [ ] **Report:** Báo cáo bài viết (màu đỏ, mở modal chọn lý do)
-  - [ ] **Copy link:** Copy URL bài viết và hiển thị toast thông báo
-  - [ ] **Edit/Delete:** Chỉ hiển thị nếu là post của user hiện tại (Delete cần confirmation)
+- [x] **Comment:** Click button Comment để mở modal "Reply", tập trung vào UI, logic mô tả ở bài sau
+- [x] **Share Post:** Click button Share để mở menu share với options:
+  - [x] **Copy link:** Dùng thư viện `copy-to-clipboard`
+  - [x] **Copy as image:** Hiển thị modal như trong gốc, dùng `html-to-image` để chuyển DOM node sang ảnh, dùng `download` để tải xuống ảnh (có demo trong Readme của `html-to-image`, hãy đọc kỹ)
+  - [x] **Get embed code:**
+    - [x] Mở EmbedModal (`/src/components/post/EmbedModal.jsx`)
+    - [x] Hiển thị preview, phần này khi nào làm trong page Embed thì dùng `iframe` để preview
+    - [x] Code embed sử dụng thẻ `<iframe>` với src link về `location.origin + "/" + username + "/post/" + postId + "/embed"`. Cấu trúc URL đơn giản chỉ là: `https://domain.com/nguyenvana/post/DiyNUECS0k/embed`. Nhấn "Copy" sẽ sao chép code trên vào clipboard
+- [x] **Post Menu (3 chấm):** Tạo dropdown menu với các options:
+  - [x] **Save/Unsave:** Lưu bài viết vào collection
+  - [x] **Not interested:** Ẩn bài viết khỏi feed
+  - [x] **Mute:** Tắt tiếng người dùng này
+  - [x] **Restrict:** Hạn chế người dùng này
+  - [x] **Block:** Chặn người dùng (màu đỏ, cần confirmation modal)
+  - [x] **Report:** Báo cáo bài viết (màu đỏ, mở modal chọn lý do)
+  - [x] **Copy link:** Copy URL bài viết và hiển thị toast thông báo
+  - [x] **Edit/Delete:** Chỉ hiển thị nếu là post của user hiện tại (Delete cần confirmation)
 - [x] **API Integration:** Tạo `/src/services/postService.js` (hoặc `src/services/post.js`) với các methods để gọi API cho tất cả actions trên.
 
 > Xử lý logic tại page Home, truyền các props bao gồm giá trị và callback vào các UI components để hiển thị và lắng nghe events.

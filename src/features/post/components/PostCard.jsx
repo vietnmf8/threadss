@@ -77,6 +77,7 @@ function PostCard({ post, isQuote = false }) {
             {/* CỘT 2: Content */}
             <div className={cn("flex flex-col", !isQuote && "col-start-2")}>
                 <PostHeader
+                    post={post}
                     user={post.user}
                     createdAt={post.created_at}
                     isQuote={isQuote}

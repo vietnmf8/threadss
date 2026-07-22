@@ -26,8 +26,10 @@ export const usePostActions = (props) => {
     const [likePost] = useLikePostMutation();
     const [repostPost] = useRepostPostMutation();
 
-    /* State quản lý việc đóng/mở menu Repost */
+    /* State quản lý việc đóng/mở menu Repost & Share Modals */
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [shareModalOpen, setShareModalOpen] = useState(false);
+    const [embedModalOpen, setEmbedModalOpen] = useState(false);
 
     /* Hàm kiểm tra đăng nhập */
     const withAuth = useCallback(
@@ -94,8 +96,8 @@ export const usePostActions = (props) => {
 
     /* Xử lý Chia sẻ */
     const handleShare = useCallback(() => {
-        console.log("Mở Menu Chia sẻ cho bài viết:", id);
-    }, [id]);
+        setShareModalOpen(true);
+    }, []);
 
     /* Cấu hình danh sách các nút  */
     const actionsConfig = useMemo(
@@ -149,6 +151,10 @@ export const usePostActions = (props) => {
         actionsConfig,
         isMenuOpen,
         setIsMenuOpen,
+        shareModalOpen,
+        setShareModalOpen,
+        embedModalOpen,
+        setEmbedModalOpen,
         handleMenuAction,
         handleRepostToggle,
         isAuthenticated,

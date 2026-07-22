@@ -1,11 +1,12 @@
-import { MorePostIcon, VerifyIcon } from "@/assets/icons";
+import { VerifyIcon } from "@/assets/icons";
 import { cn } from "@/lib/utils";
 import { formatTime } from "@/utils/dateFormatter";
 import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router";
+import PostMoreMenu from "./PostMoreMenu";
 
-function StandardPostHeader({ user, createdAt, className, onStopPropagation }) {
+function StandardPostHeader({ user, createdAt, post, className, onStopPropagation }) {
     return (
         <div
             className={cn(
@@ -20,13 +21,13 @@ function StandardPostHeader({ user, createdAt, className, onStopPropagation }) {
                     onClick={onStopPropagation}
                 >
                     <Link
-                        to={`/@${user.username}`}
+                        to={`/@${user?.username}`}
                         className="text-threads-text decoration-threads-text text-[15px] leading-5.25 font-semibold hover:underline"
                     >
-                        {user.username}
+                        {user?.username}
                     </Link>
 
-                    {user.verified && (
+                    {user?.verified && (
                         <VerifyIcon className="h-3 w-3 text-blue-500" />
                     )}
                 </div>
@@ -37,15 +38,8 @@ function StandardPostHeader({ user, createdAt, className, onStopPropagation }) {
             </div>
 
             {/* More Options */}
-            <div className="flex items-center gap-3">
-                <div
-                    role="button"
-                    onClick={onStopPropagation}
-                    className="group text-threads-dim relative flex cursor-pointer items-center justify-center"
-                >
-                    <div className="bg-threads-dropdown-hover absolute top-1/2 left-1/2 -z-10 h-9 w-9 -translate-x-1/2 -translate-y-1/2 scale-75 rounded-full opacity-0 transition-all duration-200 group-hover:scale-100 group-hover:opacity-100" />
-                    <MorePostIcon className="relative z-10 h-5 w-5" />
-                </div>
+            <div className="flex items-center gap-3" onClick={onStopPropagation}>
+                <PostMoreMenu post={post || { user, created_at: createdAt }} />
             </div>
         </div>
     );
@@ -54,8 +48,10 @@ function StandardPostHeader({ user, createdAt, className, onStopPropagation }) {
 StandardPostHeader.propTypes = {
     user: PropTypes.object.isRequired,
     createdAt: PropTypes.string.isRequired,
+    post: PropTypes.object,
     className: PropTypes.string,
     onStopPropagation: PropTypes.func.isRequired,
 };
 
 export default StandardPostHeader;
+
